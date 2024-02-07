@@ -9,6 +9,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Github } from "lucide-react";
+import SignInWithGithub from "../components/SignInWithGithub";
 
 export default function AuthRoute() {
   return (
@@ -32,9 +33,7 @@ export default function AuthRoute() {
                 />
                 <Button type="submit">Login with email</Button>
 
-                <Button variant="secondary" className="mt-2">
-                  Login with Github <Github className="w-4 h-4 ml-2" />
-                </Button>
+                <SignInWithGithub />
               </div>
             </div>
           </CardContent>

@@ -13,7 +13,6 @@ export default function SignInWithGithub() {
         })
       }
       variant="secondary"
-      className="mt-2"
     >
       Login with Github <Github className="w-4 h-4 ml-2" />
     </Button>

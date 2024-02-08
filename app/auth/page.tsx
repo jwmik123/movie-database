@@ -22,7 +22,7 @@ export default async function AuthRoute() {
     redirect("/");
   }
   return (
-    <div className="w-screen h-screen flex items-center justify-center">
+    <div className="flex h-screen w-screen items-center justify-center">
       <Card>
         <CardHeader>
           <CardTitle>Please sign in</CardTitle>

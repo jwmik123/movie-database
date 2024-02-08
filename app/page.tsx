@@ -1,7 +1,6 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "./utils/auth";
 
-import Navigation from "./components/navigation";
 import MovieList from "./components/MovieList";
 
 export default async function Home() {
@@ -9,7 +8,7 @@ export default async function Home() {
 
   return (
     <main>
-      <MovieList />
+      <MovieList session={session} />
     </main>
   );
 }

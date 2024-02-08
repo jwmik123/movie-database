@@ -9,8 +9,6 @@ export default async function Home() {
 
   return (
     <main>
-      <Navigation />
-
       <MovieList />
     </main>
   );

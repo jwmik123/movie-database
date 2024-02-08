@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import LogoutButton from "./LogoutButton";
 import Link from "next/link";
 import { ModeToggle } from "@/components/mode-toggle";
@@ -12,7 +11,9 @@ export default async function Navigation() {
 
   return (
     <nav className="flex w-full justify-between border-b-2 p-10">
-      <h1 className="text-2xl font-bold">The Movie Database</h1>
+      <Link href={"/"} className="text-2xl font-bold">
+        The Movie Database
+      </Link>
       <Search />
       <div className="flex space-x-4">
         {session ? (

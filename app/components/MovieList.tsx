@@ -2,7 +2,7 @@
 import { useQuery } from "react-query";
 import { getPopularMovies } from "../movies/api";
 import { Movie } from "../types/Movie";
-import { StarIcon } from "lucide-react";
+import Link from "next/link";
 
 interface MovieCardProps {
   movie: Movie;
@@ -20,7 +20,7 @@ export default function MovieList() {
   return (
     <div className="m-10">
       <h1 className=" text-3xl font-bold">Most Popular Movies</h1>
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-4 gap-10">
         {data?.results?.map((movie) => (
           <MovieCard key={movie.id} movie={movie} />
         ))}
@@ -31,19 +31,18 @@ export default function MovieList() {
 
 const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
   return (
-    <div className="relative my-10 cursor-pointer">
+    <Link
+      href={`/movie/${movie.id}`}
+      className="relative my-10 cursor-pointer transition-transform hover:scale-105"
+    >
       <img
         className=" w-full rounded-t-lg object-cover shadow-lg"
-        src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
+        src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
         alt={movie.title}
       />
-      <div className="bg-secondary-foreground text-primary-foreground flex items-center justify-between rounded-b-lg p-2">
+      <div className="bg-secondary-foreground text-primary-foreground flex items-center justify-between rounded-b-lg px-2 py-4 font-bold">
         <h2 className=" font-bol text-xl">{movie.title}</h2>
-        <span className="items-centers flex space-x-2 py-2">
-          <StarIcon size={24} color="blue" />
-          <p>{movie.vote_average}</p>
-        </span>
       </div>
-    </div>
+    </Link>
   );
 };

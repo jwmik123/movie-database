@@ -24,7 +24,11 @@ export const MovieCard: React.FC<MovieCardProps> = ({
         {session ? (
           <Heart
             width={32}
-            className={`cursor-pointer transition-transform hover:scale-105 hover:text-red-500 ${isFavorite ? "fill-red-500 text-red-500" : "text-black"}`}
+            className={`cursor-pointer transition-transform hover:scale-105 hover:text-red-500 ${
+              isFavorite
+                ? "fill-red-500 text-red-500"
+                : "text-primary-foreground"
+            }`}
             onClick={() => {
               onToggleFavorite();
             }}

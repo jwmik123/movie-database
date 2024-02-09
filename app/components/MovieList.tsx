@@ -18,19 +18,12 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-
 import { MovieCard } from "./MovieCard";
 
 const MovieList: React.FC<MovieListProps> = ({ session }) => {
   const [favorites, setFavorites] = useState<number[]>(() => {
     const storedFavorites = localStorage.getItem("favorites");
     return storedFavorites ? JSON.parse(storedFavorites) : [];
-  });
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const { data, isLoading, error } = useQuery<MovieAPIResponse, Error>({
-    queryKey: ["popularMovies", currentPage],
-    queryFn: () => getPopularMovies(currentPage),
   });
 
   useEffect(() => {
@@ -44,16 +37,6 @@ const MovieList: React.FC<MovieListProps> = ({ session }) => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
   }, [favorites]);
 
-  const handlePaginationChange = (newPage: number) => {
-    setCurrentPage(newPage);
-    if (newPage == 0) {
-      setCurrentPage(1);
-    }
-  };
-
-  if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>An error has occurred: {error.message}</p>;
-
   const toggleFavorite = (movieId: number) => {
     setFavorites((prevFavorites) => {
       if (prevFavorites.includes(movieId)) {
@@ -63,6 +46,23 @@ const MovieList: React.FC<MovieListProps> = ({ session }) => {
       }
     });
   };
+
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const { data, isLoading, error } = useQuery<MovieAPIResponse, Error>({
+    queryKey: ["popularMovies", currentPage],
+    queryFn: () => getPopularMovies(currentPage),
+  });
+
+  const handlePaginationChange = (newPage: number) => {
+    setCurrentPage(newPage);
+    if (newPage == 0) {
+      setCurrentPage(1);
+    }
+  };
+
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>An error has occurred: {error.message}</p>;
 
   const getMovieTitleById = (movieId: number): string => {
     const movie = data?.results?.find((m: Movie) => m.id === movieId);

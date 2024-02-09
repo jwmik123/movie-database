@@ -10,6 +10,7 @@ interface SearchProps {
   data: any;
   isLoading: boolean;
   error: any;
+  focused: (value: boolean) => void;
 }
 
 export default function Search() {
@@ -30,22 +31,34 @@ export default function Search() {
           placeholder="Search movies"
           value={query}
           onFocus={() => setInputFocused(true)}
-          onBlur={() => setInputFocused(false)}
           onChange={(e) => setQuery(e.target.value)}
         />
       </div>
       {isInputFocused && (
-        <SearchResults data={data} isLoading={isLoading} error={error} />
+        <SearchResults
+          data={data}
+          isLoading={isLoading}
+          error={error}
+          focused={setInputFocused}
+        />
       )}
     </div>
   );
 }
 
-const SearchResults: React.FC<SearchProps> = ({ data, isLoading, error }) => {
+const SearchResults: React.FC<SearchProps> = ({
+  data,
+  isLoading,
+  error,
+  focused,
+}) => {
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
   return (
-    <div className="bg-primary text-primary-foreground absolute z-50 p-5">
+    <div
+      className="bg-primary text-primary-foreground absolute z-50 p-5"
+      onClick={() => focused(false)}
+    >
       <ul className="divide-y-2 divide-gray-300">
         <p className="text-base font-bold">Search Results:</p>
         {data?.results.map((movie: Movie) => (

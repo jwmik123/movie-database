@@ -8,6 +8,7 @@ export interface Movie {
   overview?: string;
   poster_path?: string;
   backdrop_path?: string;
+  results?: Movie[];
 }
 
 export interface MovieCardProps {

@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
 import { searchMovies } from "../movies/api";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 
@@ -30,6 +29,7 @@ export default function Search() {
           placeholder="Search movies"
           value={query}
           onFocus={() => setInputFocused(true)}
+          onBlur={() => setInputFocused(false)}
           onChange={(e) => setQuery(e.target.value)}
         />
       </div>

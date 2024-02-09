@@ -4,6 +4,7 @@ import { getPopularMovies } from "../movies/api";
 import { Movie, MovieListProps } from "../types/Movie";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import {
   Pagination,
   PaginationContent,
@@ -12,6 +13,11 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 
 import { MovieCard } from "./MovieCard";
 
@@ -20,8 +26,8 @@ const MovieList: React.FC<MovieListProps> = ({ session }) => {
     const storedFavorites = localStorage.getItem("favorites");
     return storedFavorites ? JSON.parse(storedFavorites) : [];
   });
-
   const [currentPage, setCurrentPage] = useState(1);
+
   const { data, isLoading, error } = useQuery<Movie[], Error>({
     queryKey: ["popularMovies", currentPage],
     queryFn: () => getPopularMovies(currentPage),
@@ -58,6 +64,11 @@ const MovieList: React.FC<MovieListProps> = ({ session }) => {
     });
   };
 
+  const getMovieTitleById = (movieId: number): string => {
+    const movie = data?.results?.find((m: Movie) => m.id === movieId);
+    return movie ? movie.title : "Unknown Movie";
+  };
+
   return (
     <div className="m-10">
       <div className="flex items-center justify-between">
@@ -82,9 +93,26 @@ const MovieList: React.FC<MovieListProps> = ({ session }) => {
           </PaginationContent>
         </Pagination>
         {session && (
-          <Button variant="outline" className="text-lg">
-            Your favorite movies
-          </Button>
+          <>
+            <Popover>
+              <PopoverTrigger>
+                <Button>My Favorite Movies</Button>
+              </PopoverTrigger>
+              <PopoverContent>
+                <div className="flex flex-col divide-y-2">
+                  {favorites.map((movieId) => (
+                    <Link
+                      href={`/movie/${movieId}`}
+                      key={movieId}
+                      className="py-2"
+                    >
+                      {getMovieTitleById(movieId)}
+                    </Link>
+                  ))}
+                </div>
+              </PopoverContent>
+            </Popover>
+          </>
         )}
       </div>
 

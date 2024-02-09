@@ -20,11 +20,11 @@ const MovieDetailsPage = ({ params }: { params: { id: number } }) => {
 
   return (
     <>
-      <div className="relative">
+      <div className="relative h-[90vh]">
         <div className="absolute flex h-full w-full  bg-black bg-opacity-50 text-white">
           <img
             className="m-10 rounded-md object-cover"
-            src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
+            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
             alt={movie.title}
           />
           <div className="mt-10 flex flex-col space-y-2 p-10">
@@ -40,7 +40,7 @@ const MovieDetailsPage = ({ params }: { params: { id: number } }) => {
         </div>
 
         <img
-          className="w-full object-cover"
+          className="h-full w-full object-cover"
           src={`https://image.tmdb.org/t/p/w1920_and_h800_multi_faces${movie.backdrop_path}`}
           alt={movie.title}
         />

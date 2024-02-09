@@ -1,5 +1,9 @@
 import { Session } from "next-auth";
 
+export interface MovieAPIResponse {
+  results: Movie[];
+}
+
 export interface Movie {
   id: number;
   title: string;
@@ -8,7 +12,6 @@ export interface Movie {
   overview?: string;
   poster_path?: string;
   backdrop_path?: string;
-  results?: Movie[];
 }
 
 export interface MovieCardProps {

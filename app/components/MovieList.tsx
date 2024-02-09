@@ -1,7 +1,7 @@
 "use client";
 import { useQuery } from "react-query";
 import { getPopularMovies } from "../movies/api";
-import { Movie, MovieListProps } from "../types/Movie";
+import { Movie, MovieAPIResponse, MovieListProps } from "../types/Movie";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -28,7 +28,7 @@ const MovieList: React.FC<MovieListProps> = ({ session }) => {
   });
   const [currentPage, setCurrentPage] = useState(1);
 
-  const { data, isLoading, error } = useQuery<Movie[], Error>({
+  const { data, isLoading, error } = useQuery<MovieAPIResponse, Error>({
     queryKey: ["popularMovies", currentPage],
     queryFn: () => getPopularMovies(currentPage),
   });
@@ -117,7 +117,7 @@ const MovieList: React.FC<MovieListProps> = ({ session }) => {
       </div>
 
       <div className="grid grid-cols-4 gap-10">
-        {data?.results?.map((movie) => (
+        {data?.results?.map((movie: Movie) => (
           <MovieCard
             key={movie.id}
             movie={movie}

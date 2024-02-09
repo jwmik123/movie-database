@@ -9,12 +9,14 @@ export default function SignInWithGithub() {
     <Button
       onClick={() =>
         signIn("github", {
-          callbackUrl: `${window.location.origin}/`,
+          callbackUrl:
+            `https://movie-database-sand.vercel.app/` ||
+            `${window.location.origin}/`,
         })
       }
       variant="secondary"
     >
-      Login with Github <Github className="w-4 h-4 ml-2" />
+      Login with Github <Github className="ml-2 h-4 w-4" />
     </Button>
   );
 }

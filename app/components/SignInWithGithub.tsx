@@ -1,5 +1,4 @@
 "use client";
-
 import { Button } from "@/components/ui/button";
 import { Github } from "lucide-react";
 import { signIn } from "next-auth/react";
@@ -9,9 +8,7 @@ export default function SignInWithGithub() {
     <Button
       onClick={() =>
         signIn("github", {
-          callbackUrl:
-            `https://movie-database-sand.vercel.app/` ||
-            `${window.location.origin}/`,
+          callbackUrl: `https://movie-database-sand.vercel.app/`,
         })
       }
       variant="secondary"

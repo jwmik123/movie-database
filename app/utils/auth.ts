@@ -23,4 +23,5 @@ export const authOptions = {
       from: process.env.EMAIL_FROM as string,
     }),
   ],
+  secret: process.env.NEXTAUTH_SECRET as string,
 } satisfies NextAuthOptions;

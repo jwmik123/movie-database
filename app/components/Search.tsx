@@ -4,6 +4,7 @@ import { useQuery } from "react-query";
 import { searchMovies } from "../movies/api";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
+import { Movie } from "../types/Movie";
 
 interface SearchProps {
   data: any;
@@ -47,7 +48,7 @@ const SearchResults: React.FC<SearchProps> = ({ data, isLoading, error }) => {
     <div className="bg-primary text-primary-foreground absolute z-50 p-5">
       <ul className="divide-y-2 divide-gray-300">
         <p className="text-base font-bold">Search Results:</p>
-        {data?.results.map((movie) => (
+        {data?.results.map((movie: Movie) => (
           <li className="py-2" key={movie.id}>
             <Link href={`/movie/${movie.id}`}>
               {movie.title} | {movie.release_date}
